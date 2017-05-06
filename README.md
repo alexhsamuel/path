@@ -1,5 +1,4 @@
-`path.sh` is a bash library for interactive manipulation of search paths,
-like `PATH` and `PYTHONPATH`.
+`path.sh` is a bash function for interactive manipulation of search paths, like `PATH` and `PYTHONPATH`.
 
 To use it, simply source `path.sh`, possibly in your `~/.bashrc`.  
 
