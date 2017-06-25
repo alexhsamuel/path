@@ -203,32 +203,32 @@ _path-clean() {
 _path-help() {
     echo 'Usage: path VARNAME [ COMMAND ... ]
 
-    path VARNAME [ show ]
-      Prints path components of $VARNAME.
+  path VARNAME [ show ]
+    Prints path components of $VARNAME.
 
-    path VARNAME ( remove | rm | - ) ITEM
-      If ITEM is a component of $VARNAME, removes it.  
-      If ITEM is a number, returns the ITEMth component of $VARNAME.
+  path VARNAME ( remove | rm | - ) ITEM
+    If ITEM is a component of $VARNAME, removes it.  
+    If ITEM is a number, returns the ITEMth component of $VARNAME.
 
-    path VARNAME in ITEM
-      Returns true if ITEM is a component of $VARNAME.
+  path VARNAME in ITEM
+    Returns true if ITEM is a component of $VARNAME.
 
-    path VARNAME ( prepend | pre | ++ ) ITEM
-      Prepends ITEM to the path $VARNAME.  If it is already a component, 
-      replaces the existing occurrence.
+  path VARNAME ( prepend | pre | ++ ) ITEM
+    Prepends ITEM to the path $VARNAME.  If it is already a component, 
+    replaces the existing occurrence.
 
-    path VARNAME ( add | + ) ITEM
-      Appends ITEM it to the path $VARNAME if it is not a component.
+  path VARNAME ( add | + ) ITEM
+    Appends ITEM it to the path $VARNAME if it is not a component.
 
-    path VARNAME ( move | mv ) SRC [ DST ]
-      Moves item at position SRC of $VARNAME to position DST.
-      If DST is omitted, moves item at position SRC to the front of $VARNAME.
+  path VARNAME ( move | mv ) SRC [ DST ]
+    Moves item at position SRC of $VARNAME to position DST.
+    If DST is omitted, moves item at position SRC to the front of $VARNAME.
 
-    path VARNAME clean [ --real ]
-      Removes the second and subsequent occurence of each component of $VARNAME.
-      With --real, components are compared based on actual file system identity,
-      so that redundant paths to the same file are removed.
-    '
+  path VARNAME clean [ --real ]
+    Removes the second and subsequent occurence of each component of $VARNAME.
+    With --real, components are compared based on actual file system identity,
+    so that redundant paths to the same file are removed.
+  '
 }
 
 declare -A PATH_VARNAME_ALIASES
