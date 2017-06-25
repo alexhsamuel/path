@@ -179,11 +179,11 @@ _path-help() {
     path VARNAME in ITEM
       Returns true if ITEM is a component of $VARNAME.
 
-    path VARNAME ( prepend | pre | + ) ITEM
+    path VARNAME ( prepend | pre | ++ ) ITEM
       Prepends ITEM to the path $VARNAME.  If it is already a component, 
       replaces the existing occurrence.
 
-    path VARNAME ( add | ++ ) ITEM
+    path VARNAME ( add | + ) ITEM
       Appends ITEM it to the path $VARNAME if it is not a component.
 
     path VARNAME clean [ --real ]
