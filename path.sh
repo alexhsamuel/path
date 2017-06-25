@@ -12,8 +12,8 @@
 #   path PATH - 0                       # Remove the first element from it.
 #   path PYTHONPATH ++ $HOME/python     # Prepend ~/python to my Python path.
 #
-# Also supports short aliases for path environment variable names.  For
-# example,
+# Also supports short aliases for path environment variable names.  Override
+# this array variable to customize:
 #
 #   PATH_VARNAME_ALIASES=(
 #       [CP]=CLASSPATH
@@ -197,6 +197,14 @@ _path-help() {
 }
 
 declare -A PATH_VARNAME_ALIASES
+
+PATH_VARNAME_ALIASES=(
+    [CP]=CLASSPATH
+    [LD]=LD_LIBRARY_PATH
+    [MAN]=MANPATH
+    [PY]=PYTHONPATH
+    [P]=PATH
+)
 
 path() {
     local varname="$1"; shift
