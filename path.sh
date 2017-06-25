@@ -112,7 +112,7 @@ _path-prepend() {
     local parts
     IFS=":" read -r -a parts <<< "${!varname}"
 
-    local -a new_parts=("$item")
+    local new_parts=("$item")
     new_parts+=("${parts[@]}")
     _path-join-set "$varname" "${new_parts[@]}"
 }
@@ -139,6 +139,37 @@ _path-add() {
     _path-join-set "$varname" "${parts[@]}"
 }
 
+_path-move() {
+    local varname="$1"
+    local i0="$2"
+    local i1="${3:-0}"
+    local item
+    local i
+
+    local parts
+    IFS=":" read -r -a parts <<< "${!varname}"
+
+    item="${parts[$i0]}"
+    if [[ $i0 -lt $i1 ]]; then
+        # Shift items up.
+        i=$i0
+        while [[ $i -lt $i1 ]]; do
+            parts[$i]="${parts[$(($i + 1))]}"
+            i=$(($i + 1))
+        done
+    elif [[ $i0 -gt $i1 ]]; then
+        # Shift items down.
+        i=$i0
+        while [[ $i -gt $i1 ]]; do
+            parts[$i]="${parts[$(($i - 1))]}"
+            i=$(($i - 1))
+        done
+    fi
+    parts[$i1]="$item"
+
+    _path-join-set "$varname" "${parts[@]}"
+}
+
 _path-clean() {
     local varname="$1"
 
@@ -148,10 +179,10 @@ _path-clean() {
         shift
     fi
 
-    local -a parts
+    local parts
     IFS=":" read -r -a parts <<< "${!varname}"
 
-    local -a clean=()
+    local clean=()
     local part part1 
     for part in "${parts[@]}"; do
         local found=
@@ -188,6 +219,10 @@ _path-help() {
 
     path VARNAME ( add | + ) ITEM
       Appends ITEM it to the path $VARNAME if it is not a component.
+
+    path VARNAME ( move | mv ) SRC [ DST ]
+      Moves item at position SRC of $VARNAME to position DST.
+      If DST is omitted, moves item at position SRC to the front of $VARNAME.
 
     path VARNAME clean [ --real ]
       Removes the second and subsequent occurence of each component of $VARNAME.
@@ -228,8 +263,9 @@ path() {
         pre|++) command=prepend;;
         rm|-)   command=remove;;
         +)      command=add;;
+        mv)     command=move;;
         # Valid commands.
-        add|clean|in|prepend|remove|show);;
+        add|clean|in|move|prepend|remove|show);;
         # Anything else is invalid.
         *)
             echo "invalid command '$command'" >&2
