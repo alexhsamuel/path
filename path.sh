@@ -26,7 +26,10 @@
 #-------------------------------------------------------------------------------
 
 abspath() {
-    echo "$(cd "$(dirname "$1")"; echo $PWD)/$(basename "$1")"
+    (
+        unset CDPATH;
+        cd "$(dirname "$1")" && echo $PWD/$(basename "$1")
+    )
 }
 
 _path-join() {
