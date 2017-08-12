@@ -200,6 +200,11 @@ _path-clean() {
     _path-join-set "$varname" "${clean[@]}"
 }
 
+_path-clear() {
+    local varname="$1"
+    _path-join_set "$varname"
+}
+
 _path-help() {
     echo 'Usage: path VARNAME [ COMMAND ... ]
 
@@ -223,6 +228,9 @@ _path-help() {
   path VARNAME ( move | mv ) SRC [ DST ]
     Moves item at position SRC of $VARNAME to position DST.
     If DST is omitted, moves item at position SRC to the front of $VARNAME.
+
+  path VARNAME clear
+    Removes all path components.
 
   path VARNAME clean [ --real ]
     Removes the second and subsequent occurence of each component of $VARNAME.
@@ -265,7 +273,7 @@ path() {
         +)      command=add;;
         mv)     command=move;;
         # Valid commands.
-        add|clean|in|move|prepend|remove|show);;
+        add|clean|clear|in|move|prepend|remove|show);;
         # Anything else is invalid.
         *)
             echo "invalid command '$command'" >&2
