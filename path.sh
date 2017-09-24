@@ -203,7 +203,7 @@ _path-clean() {
 
 _path-clear() {
     local varname="$1"
-    _path-join_set "$varname"
+    _path-join-set "$varname"
 }
 
 _path-help() {
