@@ -15,6 +15,7 @@
 # Also supports short aliases for path environment variable names. 
 #
 #   - CP=CLASSPATH
+#   - JS=NODE_PATH
 #   - LD=LD_LIBRARY_PATH
 #   - MAN=MANPATH
 #   - PY=PYTHONPATH
@@ -38,6 +39,7 @@ _path-alias() {
     local name="$1"
     case "$name" in 
         CP)     name=CLASSPATH;;
+        JS)     name=NODE_PATH;;
         LD)     name=LD_LIBRARY_PATH;;
         MAN)    name=MANPATH;;
         PY)     name=PYTHONPATH;;
